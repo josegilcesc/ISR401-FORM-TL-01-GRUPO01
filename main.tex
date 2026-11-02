@@ -33,7 +33,7 @@ Ingeniería de Requisitos -- ISR-401}}
 \maketitle
 
 \begin{abstract}
-Avance académico acumulativo de la práctica experimental del sistema bibliotecario en línea de la UTEQ. Contenido incorporado: 5 stakeholders. Los requisitos y criterios aún requieren validación con los interesados.
+Avance académico acumulativo de la práctica experimental del sistema bibliotecario en línea de la UTEQ. Contenido incorporado: 5 stakeholders, 4 RF. Los requisitos y criterios aún requieren validación con los interesados.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -59,6 +59,19 @@ Administradores de TI & Interno, técnico & Garantizar seguridad, autenticación
 \bottomrule
 \end{tabularx}
 \end{table}
+
+\section{Tarea 2: Diez requisitos funcionales}
+Los requisitos funcionales describen capacidades y comportamientos observables del sistema. La redacción busca satisfacer las propiedades de un requisito individual establecidas por ISO/IEC/IEEE 29148:2018 \cite{ieee29148}; todos los requisitos siguen la plantilla exigida en el enunciado del curso \cite{uteqsemana1}:
+
+\begin{quote}
+\textbf{RF-NN:} El sistema deberá [acción] [objeto] cuando [condición], con el fin de [propósito].
+\end{quote}
+
+\subsection{Requisitos propuestos}
+\req{RF-01: Registro y acceso institucional}El sistema deberá habilitar el perfil bibliotecario del usuario, creado automáticamente si todavía no existe, cuando este inicie sesión con su identidad institucional validada, con el fin de identificarlo para utilizar los servicios de préstamo.
+\req{RF-02: Búsqueda de libros}El sistema deberá mostrar los libros coincidentes con el título, autor o ISBN consultado, incluyendo su disponibilidad, cuando el usuario ingrese un criterio de búsqueda, con el fin de localizar material bibliográfico.
+\req{RF-03: Reserva de libros}El sistema deberá registrar la reserva de un título sin ejemplares disponibles cuando un usuario autenticado la solicite sin tener otra reserva activa del mismo título, con el fin de asignarle un turno de espera.
+\req{RF-04: Registro de préstamos}El sistema deberá registrar el préstamo de un ejemplar disponible con vencimiento a siete días calendario cuando el bibliotecario confirme su entrega a un usuario con menos de tres préstamos activos y sin restricciones vigentes, con el fin de controlar la circulación del ejemplar.
 
 \printbibliography[title={Referencias}]
 \end{document}
