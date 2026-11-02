@@ -33,7 +33,7 @@ Ingeniería de Requisitos -- ISR-401}}
 \maketitle
 
 \begin{abstract}
-Avance académico acumulativo de la práctica experimental del sistema bibliotecario en línea de la UTEQ. Contenido incorporado: 5 stakeholders, 4 RF. Los requisitos y criterios aún requieren validación con los interesados.
+Avance académico acumulativo de la práctica experimental del sistema bibliotecario en línea de la UTEQ. Contenido incorporado: 5 stakeholders, 4 RF, 1 RNF cuantificables. Los requisitos y criterios aún requieren validación con los interesados.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -72,6 +72,36 @@ Los requisitos funcionales describen capacidades y comportamientos observables d
 \req{RF-02: Búsqueda de libros}El sistema deberá mostrar los libros coincidentes con el título, autor o ISBN consultado, incluyendo su disponibilidad, cuando el usuario ingrese un criterio de búsqueda, con el fin de localizar material bibliográfico.
 \req{RF-03: Reserva de libros}El sistema deberá registrar la reserva de un título sin ejemplares disponibles cuando un usuario autenticado la solicite sin tener otra reserva activa del mismo título, con el fin de asignarle un turno de espera.
 \req{RF-04: Registro de préstamos}El sistema deberá registrar el préstamo de un ejemplar disponible con vencimiento a siete días calendario cuando el bibliotecario confirme su entrega a un usuario con menos de tres préstamos activos y sin restricciones vigentes, con el fin de controlar la circulación del ejemplar.
+
+\section{Tarea 3: Requisitos vagos y cuantificables}
+Un requisito vago contiene expresiones subjetivas que impiden determinar cuándo el sistema cumple una necesidad. Los criterios medibles permiten evaluar las cualidades de un producto de software de manera objetiva \cite{ieee29148,iso25010}. Los enunciados V-01, V-02 y V-03 se convierten en requisitos de calidad identificados como \textbf{RNF}, con métrica, umbral, unidad, condición y método de verificación \cite{uteqsemana1,iso25010}.
+
+\subsection{V-01: Rendimiento en la búsqueda}
+\textbf{Enunciado original:} «El sistema debe ser rápido al buscar libros».
+
+\textbf{a) Problema.} «Rápido» es subjetivo: no establece tiempo aceptable, cantidad de usuarios ni tamaño de catálogo. El comportamiento temporal es un aspecto de la eficiencia de desempeño contemplado por el modelo de calidad del producto \cite{iso25010}.
+
+\textbf{b) Reescritura.}
+\req{RNF-01: Tiempo de respuesta de búsquedas}El sistema deberá devolver los resultados de búsqueda en un máximo de 2 segundos para al menos el 95\,\% de las solicitudes cuando existan 200 usuarios concurrentes y un catálogo de 20\,000 títulos, con el fin de mantener tiempos de consulta previsibles.
+
+\begin{table}[H]
+\caption{Especificación de la métrica RNF-01}
+\label{tab:rnf1}
+\footnotesize\centering
+\begin{tabularx}{\columnwidth}{@{}p{0.25\columnwidth}Y@{}}
+\toprule
+\textbf{Elemento} & \textbf{Definición}\\
+\midrule
+Métrica & Percentil 95 del tiempo de respuesta de búsqueda.\\
+Umbral & $\leq 2$ segundos.\\
+Unidad & Segundos (s).\\
+Condición & 200 usuarios concurrentes y 20\,000 títulos.\\
+Calidad & Eficiencia de desempeño: comportamiento temporal.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\textbf{c) Verificación.} Método: \emph{prueba}. Herramienta: \emph{Apache JMeter}, plataforma que permite ejecutar pruebas de carga y medir el rendimiento de aplicaciones web \cite{jmeter}. Se prepara un catálogo de prueba de 20\,000 títulos y se simulan 200 usuarios realizando búsquedas durante 30 minutos. Se mide el tiempo desde el envío de cada solicitud HTTP hasta recibir la respuesta. \textbf{Aceptación:} el percentil 95 es igual o inferior a 2 segundos en una red de pruebas controlada.
 
 \printbibliography[title={Referencias}]
 \end{document}
