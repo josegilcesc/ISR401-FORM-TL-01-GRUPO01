@@ -33,15 +33,22 @@ Ingeniería de Requisitos -- ISR-401}}
 \maketitle
 
 \begin{abstract}
-Avance académico acumulativo de la práctica experimental del sistema bibliotecario en línea de la UTEQ. Contenido incorporado: 5 stakeholders. Los requisitos y criterios aún requieren validación con los interesados.
+Avance académico acumulativo de la práctica experimental del sistema bibliotecario en línea de la UTEQ. Contenido incorporado: 9 stakeholders, 4 RF, 1 RNF cuantificables. Los requisitos y criterios aún requieren validación con los interesados.
 \end{abstract}
 
 \begin{IEEEkeywords}
 Ingeniería de requisitos, ISO/IEC/IEEE 29148, UTEQ, sistema bibliotecario.
 \end{IEEEkeywords}
 
+\section{Introducción}
+La Universidad Técnica Estatal de Quevedo requiere, en el caso de estudio planteado, un sistema bibliotecario en línea que facilite la consulta de libros, la gestión de préstamos y el control de los recursos bibliográficos utilizados por estudiantes y docentes de sus diecisiete carreras.
+
+Desde la Ingeniería de Requisitos, el propósito de esta práctica es identificar las necesidades de los interesados y expresarlas como requisitos claros, completos, singulares y verificables, siguiendo los principios de especificación y validación de requisitos \cite{ieee29148,pohl2025,swebok2024}. La actividad corresponde a la práctica experimental n.\textsuperscript{o} 1 de la Semana 1 de la asignatura ISR-401, y utiliza como referencia las características de los requisitos expuestas a partir de ISO/IEC/IEEE 29148:2018 \cite{uteqsemana1,ieee29148}.
+
+\textbf{Alcance y estado de validación:} el presente documento constituye una \emph{propuesta académica preliminar}. Las políticas de préstamos, renovación, bloqueo y cifras de desempeño aquí definidas son supuestos para la práctica; no se presentan como decisiones oficiales de la biblioteca UTEQ ni como resultados de entrevistas realizadas.
+
 \section{Tarea 1: Identificación de stakeholders}
-Los \emph{stakeholders} son personas, organizaciones o entidades que participan en el sistema, influyen en sus decisiones o se ven afectadas por su funcionamiento; su identificación y consulta constituyen parte del proceso de Ingeniería de Requisitos \cite{ieee29148,pohl2025}. En este primer avance se identifican cinco interesados internos, con niveles de influencia estimados para esta práctica (Tabla~\ref{tab:stakeholders}).
+Los \emph{stakeholders} son personas, organizaciones o entidades que participan en el sistema, influyen en sus decisiones o se ven afectadas por su funcionamiento; su identificación y consulta constituyen parte del proceso de Ingeniería de Requisitos \cite{ieee29148,pohl2025}. Se identifican nueve interesados internos y externos, con niveles de influencia estimados para esta práctica (Tabla~\ref{tab:stakeholders}).
 
 \begin{table}[H]
 \caption{Stakeholders del sistema bibliotecario de la UTEQ (identificación preliminar)}
@@ -56,9 +63,58 @@ Docentes universitarios & Interno, usuario final & Acceder a bibliografía para 
 Bibliotecarios & Interno, operador & Registrar préstamos, devoluciones, renovaciones y administrar ejemplares. & Alto\\
 Responsable de biblioteca & Interno, administrador & Supervisar el catálogo, controlar la circulación y obtener estadísticas. & Alto\\
 Administradores de TI & Interno, técnico & Garantizar seguridad, autenticación institucional, integración y funcionamiento del sistema. & Alto\\
+Personal de soporte técnico & Interno, soporte & Resolver incidentes técnicos y atender problemas de acceso de los usuarios. & Medio\\
+Autoridades académicas & Interno, patrocinador & Conocer el uso de recursos bibliográficos y apoyar decisiones de inversión. & Alto\\
+Proveedor de conectividad & Externo, proveedor & Mantener la conectividad necesaria para acceder al servicio. & Medio\\
+Autoridad de Protección de Datos Personales & Externo, regulador & Velar por el cumplimiento de las obligaciones aplicables al tratamiento de datos personales. & Alto\\
 \bottomrule
 \end{tabularx}
 \end{table}
+
+\textbf{Análisis.} Los bibliotecarios, el responsable de biblioteca y los administradores de TI requieren una participación prioritaria en la elicitación. Los estudiantes y docentes son indispensables para validar que las funciones respondan a sus necesidades. Los niveles de influencia asignados son estimaciones académicas y no el resultado de un análisis formal de poder e interés. La consideración de las obligaciones de protección de datos se apoya en la legislación ecuatoriana vigente \cite{lopdp2021}.
+
+\section{Tarea 2: Diez requisitos funcionales}
+Los requisitos funcionales describen capacidades y comportamientos observables del sistema. La redacción busca satisfacer las propiedades de un requisito individual establecidas por ISO/IEC/IEEE 29148:2018 \cite{ieee29148}; todos los requisitos siguen la plantilla exigida en el enunciado del curso \cite{uteqsemana1}:
+
+\begin{quote}
+\textbf{RF-NN:} El sistema deberá [acción] [objeto] cuando [condición], con el fin de [propósito].
+\end{quote}
+
+\subsection{Requisitos propuestos}
+\req{RF-01: Registro y acceso institucional}El sistema deberá habilitar el perfil bibliotecario del usuario, creado automáticamente si todavía no existe, cuando este inicie sesión con su identidad institucional validada, con el fin de identificarlo para utilizar los servicios de préstamo.
+\req{RF-02: Búsqueda de libros}El sistema deberá mostrar los libros coincidentes con el título, autor o ISBN consultado, incluyendo su disponibilidad, cuando el usuario ingrese un criterio de búsqueda, con el fin de localizar material bibliográfico.
+\req{RF-03: Reserva de libros}El sistema deberá registrar la reserva de un título sin ejemplares disponibles cuando un usuario autenticado la solicite sin tener otra reserva activa del mismo título, con el fin de asignarle un turno de espera.
+\req{RF-04: Registro de préstamos}El sistema deberá registrar el préstamo de un ejemplar disponible con vencimiento a siete días calendario cuando el bibliotecario confirme su entrega a un usuario con menos de tres préstamos activos y sin restricciones vigentes, con el fin de controlar la circulación del ejemplar.
+
+\section{Tarea 3: Requisitos vagos y cuantificables}
+Un requisito vago contiene expresiones subjetivas que impiden determinar cuándo el sistema cumple una necesidad. Los criterios medibles permiten evaluar las cualidades de un producto de software de manera objetiva \cite{ieee29148,iso25010}. Los enunciados V-01, V-02 y V-03 se convierten en requisitos de calidad identificados como \textbf{RNF}, con métrica, umbral, unidad, condición y método de verificación \cite{uteqsemana1,iso25010}.
+
+\subsection{V-01: Rendimiento en la búsqueda}
+\textbf{Enunciado original:} «El sistema debe ser rápido al buscar libros».
+
+\textbf{a) Problema.} «Rápido» es subjetivo: no establece tiempo aceptable, cantidad de usuarios ni tamaño de catálogo. El comportamiento temporal es un aspecto de la eficiencia de desempeño contemplado por el modelo de calidad del producto \cite{iso25010}.
+
+\textbf{b) Reescritura.}
+\req{RNF-01: Tiempo de respuesta de búsquedas}El sistema deberá devolver los resultados de búsqueda en un máximo de 2 segundos para al menos el 95\,\% de las solicitudes cuando existan 200 usuarios concurrentes y un catálogo de 20\,000 títulos, con el fin de mantener tiempos de consulta previsibles.
+
+\begin{table}[H]
+\caption{Especificación de la métrica RNF-01}
+\label{tab:rnf1}
+\footnotesize\centering
+\begin{tabularx}{\columnwidth}{@{}p{0.25\columnwidth}Y@{}}
+\toprule
+\textbf{Elemento} & \textbf{Definición}\\
+\midrule
+Métrica & Percentil 95 del tiempo de respuesta de búsqueda.\\
+Umbral & $\leq 2$ segundos.\\
+Unidad & Segundos (s).\\
+Condición & 200 usuarios concurrentes y 20\,000 títulos.\\
+Calidad & Eficiencia de desempeño: comportamiento temporal.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\textbf{c) Verificación.} Método: \emph{prueba}. Herramienta: \emph{Apache JMeter}, plataforma que permite ejecutar pruebas de carga y medir el rendimiento de aplicaciones web \cite{jmeter}. Se prepara un catálogo de prueba de 20\,000 títulos y se simulan 200 usuarios realizando búsquedas durante 30 minutos. Se mide el tiempo desde el envío de cada solicitud HTTP hasta recibir la respuesta. \textbf{Aceptación:} el percentil 95 es igual o inferior a 2 segundos en una red de pruebas controlada.
 
 \printbibliography[title={Referencias}]
 \end{document}
