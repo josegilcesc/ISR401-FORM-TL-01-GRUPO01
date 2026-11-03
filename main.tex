@@ -33,7 +33,7 @@ Ingeniería de Requisitos -- ISR-401}}
 \maketitle
 
 \begin{abstract}
-Avance académico acumulativo de la práctica experimental del sistema bibliotecario en línea de la UTEQ. Contenido incorporado: 9 stakeholders, 10 RF, 2 RNF cuantificables, 4 hallazgos de plenaria. Los requisitos y criterios aún requieren validación con los interesados.
+Avance académico acumulativo de la práctica experimental del sistema bibliotecario en línea de la UTEQ. Contenido incorporado: 9 stakeholders, 10 RF, 3 RNF cuantificables, 4 hallazgos de plenaria. Los requisitos y criterios aún requieren validación con los interesados.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -257,6 +257,60 @@ Calidad & Capacidad de interacción: operabilidad y facilidad de aprendizaje.\\
 \end{table}
 
 \textbf{c) Verificación.} Método: \emph{prueba de usabilidad con observación}, centrada en la eficacia de los usuarios al completar una tarea definida \cite{iso9241_11}. Herramientas: formulario de registro de tareas y cronómetro. Se propone seleccionar 34 estudiantes, dos por carrera. Cada participante intenta reservar desde un teléfono móvil sin recibir ayuda. Se registra el resultado y el tiempo empleado. \textbf{Aceptación:} al menos 31 de 34 participantes completan la reserva en tres minutos o menos, sin asistencia.
+
+\subsection{V-03: Disponibilidad del servicio}
+\textbf{Enunciado original:} «El sistema debe estar disponible casi todo el tiempo».
+
+\textbf{a) Problema.} «Casi todo el tiempo» no define porcentaje de disponibilidad, período de observación ni registro de interrupciones. La disponibilidad constituye una subcaracterística de fiabilidad en el modelo ISO/IEC 25010:2023 \cite{iso25010}.
+
+\textbf{b) Reescritura.}
+\req{RNF-03: Disponibilidad mensual del servicio}El sistema deberá mantener una disponibilidad mensual mínima del 99,5\,\% del servicio bibliotecario en línea cuando opere durante un mes calendario, con el fin de permitir el acceso continuo a los recursos bibliográficos.
+
+\begin{table}[H]
+\caption{Especificación de la métrica RNF-03}
+\label{tab:rnf3}
+\footnotesize\centering
+\begin{tabularx}{\columnwidth}{@{}p{0.25\columnwidth}Y@{}}
+\toprule
+\textbf{Elemento} & \textbf{Definición}\\
+\midrule
+Métrica & Disponibilidad mensual del servicio.\\
+Umbral & $\geq 99{,}5\,\%$.\\
+Unidad & Porcentaje (\%).\\
+Período & Un mes calendario.\\
+Condición & Servicio continuo, incluidos fines de semana y feriados.\\
+Calidad & Fiabilidad: disponibilidad.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Para un mes de 30 días, el umbral corresponde a un máximo de 216 minutos de indisponibilidad (3 horas y 36 minutos).
+
+\textbf{c) Verificación.} Método: \emph{análisis de registros de monitoreo}. Herramienta: \emph{Uptime Kuma}, proyecto de monitoreo de servicios, complementado con comprobaciones funcionales \cite{uptimekuma}. Cada minuto, desde una red externa, se consulta un título de prueba conocido y se comprueba la respuesta esperada en un máximo de 5 segundos. Se calcula:
+\begin{equation}
+D=\frac{T_{\mathrm{operativo}}}{T_{\mathrm{total}}}\times 100.
+\label{eq:disponibilidad}
+\end{equation}
+Aquí, $D$ es el porcentaje de disponibilidad; $T_{\mathrm{operativo}}$, el número de minutos con respuesta correcta; y $T_{\mathrm{total}}$, los minutos del período observado. \textbf{Aceptación:} disponibilidad mensual igual o superior a $99{,}5\,\%$. Las interrupciones programadas también se contabilizan como indisponibilidad.
+
+\subsection{Comparación de las tres reformulaciones}
+\begin{table}[H]
+\caption{Comparación entre expresiones vagas y criterios medibles}
+\label{tab:comparacion}
+\centering\footnotesize
+\begin{tabularx}{\textwidth}{@{}p{0.10\textwidth}p{0.27\textwidth}Yp{0.24\textwidth}@{}}
+\toprule
+\textbf{Código} & \textbf{Problema original} & \textbf{Criterio medible} & \textbf{Verificación}\\
+\midrule
+V-01 & «Rápido» no establece un tiempo. & Percentil 95 $\leq 2$ s con 200 usuarios concurrentes. & Prueba de carga con JMeter.\\
+V-02 & «Fácil» depende de la percepción. & Al menos 90\,\% completan una reserva en tres minutos o menos. & Prueba de usabilidad con observación.\\
+V-03 & «Casi todo el tiempo» no establece disponibilidad. & Disponibilidad mensual $\geq 99{,}5\,\%$. & Monitoreo y análisis de registros.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Alcance de las métricas propuestas}
+Los umbrales de 2 segundos, 90\,\% de finalización de reservas y 99,5\,\% de disponibilidad son parámetros académicos iniciales. Deben negociarse y validarse con representantes de biblioteca, estudiantes y responsables de TI; no proceden de mediciones reales de operación en la UTEQ \cite{ieee29148,iso25010}.
 
 \section{Tarea 4: Plenaria}
 Se proponen siete hallazgos para la presentación grupal, a partir de los criterios de redacción, verificación y validación de requisitos discutidos en el material de clase y en la bibliografía de referencia \cite{uteqsemana1,ieee29148,pohl2025}.
