@@ -33,7 +33,7 @@ Ingeniería de Requisitos -- ISR-401}}
 \maketitle
 
 \begin{abstract}
-Avance académico acumulativo de la práctica experimental del sistema bibliotecario en línea de la UTEQ. Contenido incorporado: 9 stakeholders, 8 RF, 2 RNF cuantificables, 4 hallazgos de plenaria. Los requisitos y criterios aún requieren validación con los interesados.
+Avance académico acumulativo de la práctica experimental del sistema bibliotecario en línea de la UTEQ. Contenido incorporado: 9 stakeholders, 10 RF, 2 RNF cuantificables, 4 hallazgos de plenaria. Los requisitos y criterios aún requieren validación con los interesados.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -122,9 +122,11 @@ Los requisitos funcionales describen capacidades y comportamientos observables d
 \req{RF-06: Renovación de préstamos}El sistema deberá ampliar en siete días calendario la fecha de vencimiento vigente de un préstamo cuando su titular solicite la primera renovación antes del vencimiento y el título no tenga reservas pendientes, con el fin de extender el período autorizado de uso.
 \req{RF-07: Notificaciones de vencimiento (versión inicial)}El sistema deberá enviar un aviso al correo institucional del usuario cuando se aproxime el vencimiento de un préstamo activo, con el fin de recordarle la devolución.
 \req{RF-08: Sanciones por retraso}El sistema deberá impedir la creación de nuevos préstamos para un usuario cuando este mantenga al menos un préstamo vencido sin devolver, con el fin de aplicar la restricción temporal por retraso.
+\req{RF-09: Gestión del catálogo bibliográfico}El sistema deberá registrar un nuevo título en el catálogo con su nombre, autor e ISBN cuando un bibliotecario autorizado ingrese un ISBN no registrado, con el fin de mantener actualizado el catálogo universitario.
+\req{RF-10: Generación de reportes}El sistema deberá generar un reporte del número de préstamos registrados por carrera en un intervalo de fechas cuando el responsable de biblioteca indique las fechas inicial y final, con el fin de analizar el uso del servicio en las diecisiete carreras.
 
 \subsection{Verificación con las nueve características}
-Según el material de estudio, las características aplicables son \emph{necesario}, \emph{apropiado al nivel}, \emph{no ambiguo}, \emph{completo}, \emph{singular}, \emph{factible}, \emph{verificable}, \emph{correcto} y \emph{conforme} \cite{uteqsemana1,ieee29148}. La Tabla~\ref{tab:abreviaturas} presenta las abreviaturas; la Tabla~\ref{tab:evaluacion} muestra la revisión preliminar de los ocho requisitos desarrollados hasta esta etapa.
+Según el material de estudio, las características aplicables son \emph{necesario}, \emph{apropiado al nivel}, \emph{no ambiguo}, \emph{completo}, \emph{singular}, \emph{factible}, \emph{verificable}, \emph{correcto} y \emph{conforme} \cite{uteqsemana1,ieee29148}. La Tabla~\ref{tab:abreviaturas} presenta las abreviaturas; la Tabla~\ref{tab:evaluacion} muestra la revisión preliminar.
 
 \begin{table}[H]
 \caption{Abreviaturas de las nueve características}
@@ -164,13 +166,40 @@ RF-05 & \si & \si & \si & \si & \si & \si & \si & \si & \si\\
 RF-06 & \si & \si & \si & \si & \si & \si & \si & \si & \si\\
 RF-07 & \si & \si & \no & \no & \si & \si & \no & \si & \si\\
 RF-08 & \si & \si & \si & \si & \si & \si & \si & \si & \si\\
+RF-09 & \si & \si & \si & \si & \si & \si & \si & \si & \si\\
+RF-10 & \si & \si & \si & \si & \si & \si & \si & \si & \si\\
 \bottomrule
 \end{tabular}
 \end{table}
 
 Esta valoración es una revisión de coherencia con el caso y los supuestos propuestos. Las características \emph{necesario} y \emph{correcto} no pueden considerarse aprobadas por la UTEQ sin consultar a sus stakeholders.
 
-\noindent\textit{Pendiente:} completar RF-09 y RF-10, ampliar la matriz y revisar RF-07 antes de cerrar la especificación.
+\subsection{Corrección de RF-07}
+En su versión inicial, RF-07 presenta tres problemas: (i) \emph{no ambiguo}, porque «se aproxime» no indica el instante de envío; (ii) \emph{completo}, porque omite la anticipación requerida; y (iii) \emph{verificable}, porque no establece cuándo comprobar el envío.
+
+\req{RF-07: Notificaciones de vencimiento (versión corregida)}El sistema deberá enviar un aviso al correo institucional del usuario cuando falten exactamente 24 horas para el vencimiento de un préstamo activo, con el fin de recordarle la fecha de devolución.
+
+\begin{table}[H]
+\caption{Resultado de la corrección de RF-07}
+\label{tab:correccion}
+\centering\scriptsize
+\setlength{\tabcolsep}{3.6pt}
+\begin{tabular}{@{}l*{9}{c}@{}}
+\toprule
+\textbf{RF} & \textbf{N} & \textbf{A} & \textbf{Am} & \textbf{C} & \textbf{S} & \textbf{F} & \textbf{V} & \textbf{Co} & \textbf{Cf}\\
+\midrule
+RF-07 & \si & \si & \si & \si & \si & \si & \si & \si & \si\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+La corrección introduce una condición temporal concreta, verificable mediante pruebas con fechas simuladas y registros de notificación, de acuerdo con el criterio de verificabilidad de los requisitos \cite{ieee29148}. Por tanto, los diez requisitos cuentan con una versión final que cumple la revisión \emph{de redacción} bajo los supuestos establecidos.
+
+La singularidad se conserva en RF-01 porque el aprovisionamiento automático del perfil bibliotecario se considera parte de una única operación de acceso institucional. Si el proceso real requiere una inscripción independiente, deberán separarse los comportamientos en dos requisitos.
+
+\section{Consideraciones para la validación}
+Los requisitos RF-04, RF-06 y RF-08 dependen de políticas preliminares de circulación bibliotecaria. La corrección de RF-07 establece un instante de envío, pero la entrega efectiva del correo deberá comprobarse durante las pruebas de integración. Ningún requisito se considera institucionalmente aprobado antes de revisarlo con la biblioteca \cite{ieee29148}.
+
 \section{Tarea 3: Requisitos vagos y cuantificables}
 Un requisito vago contiene expresiones subjetivas que impiden determinar cuándo el sistema cumple una necesidad. Los criterios medibles permiten evaluar las cualidades de un producto de software de manera objetiva \cite{ieee29148,iso25010}. Los enunciados V-01, V-02 y V-03 se convierten en requisitos de calidad identificados como \textbf{RNF}, con métrica, umbral, unidad, condición y método de verificación \cite{uteqsemana1,iso25010}.
 
