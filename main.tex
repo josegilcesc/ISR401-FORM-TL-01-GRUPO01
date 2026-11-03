@@ -33,7 +33,7 @@ Ingeniería de Requisitos -- ISR-401}}
 \maketitle
 
 \begin{abstract}
-Avance académico acumulativo de la práctica experimental del sistema bibliotecario en línea de la UTEQ. Contenido incorporado: 9 stakeholders, 4 RF, 1 RNF cuantificables. Los requisitos y criterios aún requieren validación con los interesados.
+Avance académico acumulativo de la práctica experimental del sistema bibliotecario en línea de la UTEQ. Contenido incorporado: 9 stakeholders, 8 RF, 2 RNF cuantificables, 4 hallazgos de plenaria. Los requisitos y criterios aún requieren validación con los interesados.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -73,6 +73,39 @@ Autoridad de Protección de Datos Personales & Externo, regulador & Velar por el
 
 \textbf{Análisis.} Los bibliotecarios, el responsable de biblioteca y los administradores de TI requieren una participación prioritaria en la elicitación. Los estudiantes y docentes son indispensables para validar que las funciones respondan a sus necesidades. Los niveles de influencia asignados son estimaciones académicas y no el resultado de un análisis formal de poder e interés. La consideración de las obligaciones de protección de datos se apoya en la legislación ecuatoriana vigente \cite{lopdp2021}.
 
+\section{Suposiciones explícitas}
+Dado que el caso no proporciona todas las políticas operativas de la biblioteca, se adoptan diez supuestos \emph{provisionales} (Tabla~\ref{tab:supuestos}). Deben revisarse con la UTEQ antes de aprobar una línea base de requisitos, puesto que la validación requiere evidencia del acuerdo con las necesidades reales de las partes interesadas \cite{ieee29148,pohl2025}.
+
+\begin{table}[H]
+\caption{Suposiciones utilizadas en el caso de estudio}
+\label{tab:supuestos}
+\centering\footnotesize
+\begin{tabularx}{\textwidth}{@{}p{0.07\textwidth}p{0.45\textwidth}Y@{}}
+\toprule
+\textbf{ID} & \textbf{Suposición} & \textbf{Justificación}\\
+\midrule
+S-01 & Estudiantes y docentes disponen de identidad institucional válida. & Integrar el acceso y reducir duplicación de registros.\\
+S-02 & El perfil bibliotecario se crea automáticamente durante el primer acceso institucional. & Unificar alta inicial y entrada en una operación.\\
+S-03 & Se permiten como máximo tres préstamos activos por usuario. & Controlar la distribución de ejemplares.\\
+S-04 & La duración inicial de cada préstamo es de siete días calendario. & Definir vencimientos comprobables.\\
+S-05 & Se permite una renovación de siete días si no hay reservas pendientes. & Equilibrar la continuidad del uso y la demanda de otros lectores.\\
+S-06 & Un préstamo vencido genera una restricción temporal de nuevos préstamos. & Ejemplificar una sanción sin asumir multas económicas.\\
+S-07 & Cada ejemplar físico cuenta con un identificador único. & Diferenciar copias del mismo título y garantizar trazabilidad.\\
+S-08 & La carrera del usuario puede obtenerse de una fuente institucional autorizada. & Generar estadísticas sin duplicar datos académicos.\\
+S-09 & El escenario de prueba contiene 20\,000 títulos y 200 usuarios concurrentes. & Fijar parámetros iniciales de rendimiento, no cifras reales verificadas.\\
+S-10 & Las diecisiete carreras constituyen el alcance académico del estudio. & Respetar el caso planteado por el docente.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Aspectos pendientes de validación}
+\begin{itemize}
+\item Confirmar con los responsables de biblioteca los plazos, cupos, renovaciones y eventuales excepciones.
+\item Verificar la disponibilidad real de identidad institucional y la procedencia autorizada del dato de carrera.
+\item Determinar si estudiantes y docentes tienen políticas diferenciadas.
+\item Distinguir la función del organismo regulador como interesado externo del cumplimiento normativo, no como usuario operativo del software.
+\end{itemize}
+
 \section{Tarea 2: Diez requisitos funcionales}
 Los requisitos funcionales describen capacidades y comportamientos observables del sistema. La redacción busca satisfacer las propiedades de un requisito individual establecidas por ISO/IEC/IEEE 29148:2018 \cite{ieee29148}; todos los requisitos siguen la plantilla exigida en el enunciado del curso \cite{uteqsemana1}:
 
@@ -85,7 +118,59 @@ Los requisitos funcionales describen capacidades y comportamientos observables d
 \req{RF-02: Búsqueda de libros}El sistema deberá mostrar los libros coincidentes con el título, autor o ISBN consultado, incluyendo su disponibilidad, cuando el usuario ingrese un criterio de búsqueda, con el fin de localizar material bibliográfico.
 \req{RF-03: Reserva de libros}El sistema deberá registrar la reserva de un título sin ejemplares disponibles cuando un usuario autenticado la solicite sin tener otra reserva activa del mismo título, con el fin de asignarle un turno de espera.
 \req{RF-04: Registro de préstamos}El sistema deberá registrar el préstamo de un ejemplar disponible con vencimiento a siete días calendario cuando el bibliotecario confirme su entrega a un usuario con menos de tres préstamos activos y sin restricciones vigentes, con el fin de controlar la circulación del ejemplar.
+\req{RF-05: Registro de devoluciones}El sistema deberá cerrar el préstamo activo de un ejemplar cuando el bibliotecario registre su recepción mediante el identificador único del ejemplar, con el fin de actualizar su estado de circulación.
+\req{RF-06: Renovación de préstamos}El sistema deberá ampliar en siete días calendario la fecha de vencimiento vigente de un préstamo cuando su titular solicite la primera renovación antes del vencimiento y el título no tenga reservas pendientes, con el fin de extender el período autorizado de uso.
+\req{RF-07: Notificaciones de vencimiento (versión inicial)}El sistema deberá enviar un aviso al correo institucional del usuario cuando se aproxime el vencimiento de un préstamo activo, con el fin de recordarle la devolución.
+\req{RF-08: Sanciones por retraso}El sistema deberá impedir la creación de nuevos préstamos para un usuario cuando este mantenga al menos un préstamo vencido sin devolver, con el fin de aplicar la restricción temporal por retraso.
 
+\subsection{Verificación con las nueve características}
+Según el material de estudio, las características aplicables son \emph{necesario}, \emph{apropiado al nivel}, \emph{no ambiguo}, \emph{completo}, \emph{singular}, \emph{factible}, \emph{verificable}, \emph{correcto} y \emph{conforme} \cite{uteqsemana1,ieee29148}. La Tabla~\ref{tab:abreviaturas} presenta las abreviaturas; la Tabla~\ref{tab:evaluacion} muestra la revisión preliminar de los ocho requisitos desarrollados hasta esta etapa.
+
+\begin{table}[H]
+\caption{Abreviaturas de las nueve características}
+\label{tab:abreviaturas}
+\centering\footnotesize
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Abreviatura} & \textbf{Característica}\\
+\midrule
+Nec. & Necesario\\
+Apr. & Apropiado al nivel\\
+Amb. & No ambiguo\\
+Com. & Completo\\
+Sin. & Singular\\
+Fac. & Factible\\
+Ver. & Verificable\\
+Cor. & Correcto\\
+Con. & Conforme\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{Evaluación preliminar de cada requisito funcional (\si: cumple; \no: requiere corrección)}
+\label{tab:evaluacion}
+\centering\small
+\setlength{\tabcolsep}{9pt}
+\begin{tabular}{@{}l*{9}{c}@{}}
+\toprule
+\textbf{RF} & \textbf{Nec.} & \textbf{Apr.} & \textbf{Amb.} & \textbf{Com.} & \textbf{Sin.} & \textbf{Fac.} & \textbf{Ver.} & \textbf{Cor.} & \textbf{Con.}\\
+\midrule
+RF-01 & \si & \si & \si & \si & \si & \si & \si & \si & \si\\
+RF-02 & \si & \si & \si & \si & \si & \si & \si & \si & \si\\
+RF-03 & \si & \si & \si & \si & \si & \si & \si & \si & \si\\
+RF-04 & \si & \si & \si & \si & \si & \si & \si & \si & \si\\
+RF-05 & \si & \si & \si & \si & \si & \si & \si & \si & \si\\
+RF-06 & \si & \si & \si & \si & \si & \si & \si & \si & \si\\
+RF-07 & \si & \si & \no & \no & \si & \si & \no & \si & \si\\
+RF-08 & \si & \si & \si & \si & \si & \si & \si & \si & \si\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Esta valoración es una revisión de coherencia con el caso y los supuestos propuestos. Las características \emph{necesario} y \emph{correcto} no pueden considerarse aprobadas por la UTEQ sin consultar a sus stakeholders.
+
+\noindent\textit{Pendiente:} completar RF-09 y RF-10, ampliar la matriz y revisar RF-07 antes de cerrar la especificación.
 \section{Tarea 3: Requisitos vagos y cuantificables}
 Un requisito vago contiene expresiones subjetivas que impiden determinar cuándo el sistema cumple una necesidad. Los criterios medibles permiten evaluar las cualidades de un producto de software de manera objetiva \cite{ieee29148,iso25010}. Los enunciados V-01, V-02 y V-03 se convierten en requisitos de calidad identificados como \textbf{RNF}, con métrica, umbral, unidad, condición y método de verificación \cite{uteqsemana1,iso25010}.
 
@@ -115,6 +200,44 @@ Calidad & Eficiencia de desempeño: comportamiento temporal.\\
 \end{table}
 
 \textbf{c) Verificación.} Método: \emph{prueba}. Herramienta: \emph{Apache JMeter}, plataforma que permite ejecutar pruebas de carga y medir el rendimiento de aplicaciones web \cite{jmeter}. Se prepara un catálogo de prueba de 20\,000 títulos y se simulan 200 usuarios realizando búsquedas durante 30 minutos. Se mide el tiempo desde el envío de cada solicitud HTTP hasta recibir la respuesta. \textbf{Aceptación:} el percentil 95 es igual o inferior a 2 segundos en una red de pruebas controlada.
+
+\subsection{V-02: Facilidad de uso}
+\textbf{Enunciado original:} «El sistema debe ser fácil de usar para los estudiantes».
+
+\textbf{a) Problema.} «Fácil de usar» es subjetivo y no indica tarea, tiempo máximo ni porcentaje de usuarios que deben completarla. La evaluación debe considerar usuarios, objetivos y contexto de uso especificados, según ISO 9241-11:2018 \cite{iso9241_11}.
+
+\textbf{b) Reescritura.}
+\req{RNF-02: Eficacia de uso en reservas}El sistema deberá permitir que al menos el 90\,\% de los estudiantes participantes complete una reserva de un título sin ejemplares disponibles en un máximo de 3 minutos cuando utilicen por primera vez la interfaz móvil sin asistencia, con el fin de facilitar el acceso a los servicios bibliotecarios.
+
+\begin{table}[H]
+\caption{Especificación de la métrica RNF-02}
+\label{tab:rnf2}
+\footnotesize\centering
+\begin{tabularx}{\columnwidth}{@{}p{0.25\columnwidth}Y@{}}
+\toprule
+\textbf{Elemento} & \textbf{Definición}\\
+\midrule
+Métrica & Porcentaje de participantes que completan una reserva sin ayuda.\\
+Umbral & $\geq 90\,\%$.\\
+Tiempo & Máximo 3 minutos por participante.\\
+Unidad & Porcentaje (\%) y minutos (min).\\
+Condición & Primer uso de interfaz móvil; título de prueba sin ejemplares disponibles.\\
+Calidad & Capacidad de interacción: operabilidad y facilidad de aprendizaje.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\textbf{c) Verificación.} Método: \emph{prueba de usabilidad con observación}, centrada en la eficacia de los usuarios al completar una tarea definida \cite{iso9241_11}. Herramientas: formulario de registro de tareas y cronómetro. Se propone seleccionar 34 estudiantes, dos por carrera. Cada participante intenta reservar desde un teléfono móvil sin recibir ayuda. Se registra el resultado y el tiempo empleado. \textbf{Aceptación:} al menos 31 de 34 participantes completan la reserva en tres minutos o menos, sin asistencia.
+
+\section{Tarea 4: Plenaria}
+Se proponen siete hallazgos para la presentación grupal, a partir de los criterios de redacción, verificación y validación de requisitos discutidos en el material de clase y en la bibliografía de referencia \cite{uteqsemana1,ieee29148,pohl2025}.
+
+\begin{enumerate}
+\item \textbf{Expresar necesidades concretas.} Un requisito debe indicar qué comportamiento se espera del sistema y bajo qué condiciones, evitando imponer decisiones técnicas de implementación sin justificación.
+\item \textbf{Eliminar la ambigüedad.} Palabras como «rápido», «sencillo» o «casi siempre» generan interpretaciones incompatibles. Deben sustituirse por condiciones y criterios verificables.
+\item \textbf{Aplicar una plantilla uniforme.} «El sistema deberá\ldots{} cuando\ldots{} con el fin de\ldots{}» facilita identificar acción, objeto, condición y propósito.
+\item \textbf{Evaluar las nueve características por separado.} Un requisito puede ser necesario pero ambiguo, factible pero incompleto, o formalmente conforme pero incorrecto respecto a la necesidad real.
+\end{enumerate}
 
 \printbibliography[title={Referencias}]
 \end{document}
