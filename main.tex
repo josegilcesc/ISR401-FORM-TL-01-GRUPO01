@@ -33,7 +33,7 @@ Ingeniería de Requisitos -- ISR-401}}
 \maketitle
 
 \begin{abstract}
-Avance académico acumulativo de la práctica experimental del sistema bibliotecario en línea de la UTEQ. Contenido incorporado: 9 stakeholders, 8 RF, 1 RNF cuantificables. Los requisitos y criterios aún requieren validación con los interesados.
+Avance académico acumulativo de la práctica experimental del sistema bibliotecario en línea de la UTEQ. Contenido incorporado: 9 stakeholders, 8 RF, 2 RNF cuantificables. Los requisitos y criterios aún requieren validación con los interesados.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -167,6 +167,34 @@ Calidad & Eficiencia de desempeño: comportamiento temporal.\\
 \end{table}
 
 \textbf{c) Verificación.} Método: \emph{prueba}. Herramienta: \emph{Apache JMeter}, plataforma que permite ejecutar pruebas de carga y medir el rendimiento de aplicaciones web \cite{jmeter}. Se prepara un catálogo de prueba de 20\,000 títulos y se simulan 200 usuarios realizando búsquedas durante 30 minutos. Se mide el tiempo desde el envío de cada solicitud HTTP hasta recibir la respuesta. \textbf{Aceptación:} el percentil 95 es igual o inferior a 2 segundos en una red de pruebas controlada.
+
+\subsection{V-02: Facilidad de uso}
+\textbf{Enunciado original:} «El sistema debe ser fácil de usar para los estudiantes».
+
+\textbf{a) Problema.} «Fácil de usar» es subjetivo y no indica tarea, tiempo máximo ni porcentaje de usuarios que deben completarla. La evaluación debe considerar usuarios, objetivos y contexto de uso especificados, según ISO 9241-11:2018 \cite{iso9241_11}.
+
+\textbf{b) Reescritura.}
+\req{RNF-02: Eficacia de uso en reservas}El sistema deberá permitir que al menos el 90\,\% de los estudiantes participantes complete una reserva de un título sin ejemplares disponibles en un máximo de 3 minutos cuando utilicen por primera vez la interfaz móvil sin asistencia, con el fin de facilitar el acceso a los servicios bibliotecarios.
+
+\begin{table}[H]
+\caption{Especificación de la métrica RNF-02}
+\label{tab:rnf2}
+\footnotesize\centering
+\begin{tabularx}{\columnwidth}{@{}p{0.25\columnwidth}Y@{}}
+\toprule
+\textbf{Elemento} & \textbf{Definición}\\
+\midrule
+Métrica & Porcentaje de participantes que completan una reserva sin ayuda.\\
+Umbral & $\geq 90\,\%$.\\
+Tiempo & Máximo 3 minutos por participante.\\
+Unidad & Porcentaje (\%) y minutos (min).\\
+Condición & Primer uso de interfaz móvil; título de prueba sin ejemplares disponibles.\\
+Calidad & Capacidad de interacción: operabilidad y facilidad de aprendizaje.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\textbf{c) Verificación.} Método: \emph{prueba de usabilidad con observación}, centrada en la eficacia de los usuarios al completar una tarea definida \cite{iso9241_11}. Herramientas: formulario de registro de tareas y cronómetro. Se propone seleccionar 34 estudiantes, dos por carrera. Cada participante intenta reservar desde un teléfono móvil sin recibir ayuda. Se registra el resultado y el tiempo empleado. \textbf{Aceptación:} al menos 31 de 34 participantes completan la reserva en tres minutos o menos, sin asistencia.
 
 \printbibliography[title={Referencias}]
 \end{document}
