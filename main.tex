@@ -33,7 +33,7 @@ Ingeniería de Requisitos -- ISR-401}}
 \maketitle
 
 \begin{abstract}
-Avance académico acumulativo de la práctica experimental del sistema bibliotecario en línea de la UTEQ. Contenido incorporado: 9 stakeholders, 4 RF, 1 RNF cuantificables. Los requisitos y criterios aún requieren validación con los interesados.
+Avance académico acumulativo de la práctica experimental del sistema bibliotecario en línea de la UTEQ. Contenido incorporado: 9 stakeholders, 8 RF, 1 RNF cuantificables. Los requisitos y criterios aún requieren validación con los interesados.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -85,7 +85,59 @@ Los requisitos funcionales describen capacidades y comportamientos observables d
 \req{RF-02: Búsqueda de libros}El sistema deberá mostrar los libros coincidentes con el título, autor o ISBN consultado, incluyendo su disponibilidad, cuando el usuario ingrese un criterio de búsqueda, con el fin de localizar material bibliográfico.
 \req{RF-03: Reserva de libros}El sistema deberá registrar la reserva de un título sin ejemplares disponibles cuando un usuario autenticado la solicite sin tener otra reserva activa del mismo título, con el fin de asignarle un turno de espera.
 \req{RF-04: Registro de préstamos}El sistema deberá registrar el préstamo de un ejemplar disponible con vencimiento a siete días calendario cuando el bibliotecario confirme su entrega a un usuario con menos de tres préstamos activos y sin restricciones vigentes, con el fin de controlar la circulación del ejemplar.
+\req{RF-05: Registro de devoluciones}El sistema deberá cerrar el préstamo activo de un ejemplar cuando el bibliotecario registre su recepción mediante el identificador único del ejemplar, con el fin de actualizar su estado de circulación.
+\req{RF-06: Renovación de préstamos}El sistema deberá ampliar en siete días calendario la fecha de vencimiento vigente de un préstamo cuando su titular solicite la primera renovación antes del vencimiento y el título no tenga reservas pendientes, con el fin de extender el período autorizado de uso.
+\req{RF-07: Notificaciones de vencimiento (versión inicial)}El sistema deberá enviar un aviso al correo institucional del usuario cuando se aproxime el vencimiento de un préstamo activo, con el fin de recordarle la devolución.
+\req{RF-08: Sanciones por retraso}El sistema deberá impedir la creación de nuevos préstamos para un usuario cuando este mantenga al menos un préstamo vencido sin devolver, con el fin de aplicar la restricción temporal por retraso.
 
+\subsection{Verificación con las nueve características}
+Según el material de estudio, las características aplicables son \emph{necesario}, \emph{apropiado al nivel}, \emph{no ambiguo}, \emph{completo}, \emph{singular}, \emph{factible}, \emph{verificable}, \emph{correcto} y \emph{conforme} \cite{uteqsemana1,ieee29148}. La Tabla~\ref{tab:abreviaturas} presenta las abreviaturas; la Tabla~\ref{tab:evaluacion} muestra la revisión preliminar de los ocho requisitos desarrollados hasta esta etapa.
+
+\begin{table}[H]
+\caption{Abreviaturas de las nueve características}
+\label{tab:abreviaturas}
+\centering\footnotesize
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Abreviatura} & \textbf{Característica}\\
+\midrule
+Nec. & Necesario\\
+Apr. & Apropiado al nivel\\
+Amb. & No ambiguo\\
+Com. & Completo\\
+Sin. & Singular\\
+Fac. & Factible\\
+Ver. & Verificable\\
+Cor. & Correcto\\
+Con. & Conforme\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{Evaluación preliminar de cada requisito funcional (\si: cumple; \no: requiere corrección)}
+\label{tab:evaluacion}
+\centering\small
+\setlength{\tabcolsep}{9pt}
+\begin{tabular}{@{}l*{9}{c}@{}}
+\toprule
+\textbf{RF} & \textbf{Nec.} & \textbf{Apr.} & \textbf{Amb.} & \textbf{Com.} & \textbf{Sin.} & \textbf{Fac.} & \textbf{Ver.} & \textbf{Cor.} & \textbf{Con.}\\
+\midrule
+RF-01 & \si & \si & \si & \si & \si & \si & \si & \si & \si\\
+RF-02 & \si & \si & \si & \si & \si & \si & \si & \si & \si\\
+RF-03 & \si & \si & \si & \si & \si & \si & \si & \si & \si\\
+RF-04 & \si & \si & \si & \si & \si & \si & \si & \si & \si\\
+RF-05 & \si & \si & \si & \si & \si & \si & \si & \si & \si\\
+RF-06 & \si & \si & \si & \si & \si & \si & \si & \si & \si\\
+RF-07 & \si & \si & \no & \no & \si & \si & \no & \si & \si\\
+RF-08 & \si & \si & \si & \si & \si & \si & \si & \si & \si\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Esta valoración es una revisión de coherencia con el caso y los supuestos propuestos. Las características \emph{necesario} y \emph{correcto} no pueden considerarse aprobadas por la UTEQ sin consultar a sus stakeholders.
+
+\noindent\textit{Pendiente:} completar RF-09 y RF-10, ampliar la matriz y revisar RF-07 antes de cerrar la especificación.
 \section{Tarea 3: Requisitos vagos y cuantificables}
 Un requisito vago contiene expresiones subjetivas que impiden determinar cuándo el sistema cumple una necesidad. Los criterios medibles permiten evaluar las cualidades de un producto de software de manera objetiva \cite{ieee29148,iso25010}. Los enunciados V-01, V-02 y V-03 se convierten en requisitos de calidad identificados como \textbf{RNF}, con métrica, umbral, unidad, condición y método de verificación \cite{uteqsemana1,iso25010}.
 
