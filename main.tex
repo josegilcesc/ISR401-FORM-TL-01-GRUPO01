@@ -33,7 +33,7 @@ Ingeniería de Requisitos -- ISR-401}}
 \maketitle
 
 \begin{abstract}
-Avance académico acumulativo de la práctica experimental del sistema bibliotecario en línea de la UTEQ. Contenido incorporado: 9 stakeholders, 10 RF, 3 RNF cuantificables, 4 hallazgos de plenaria. Los requisitos y criterios aún requieren validación con los interesados.
+Documento final integrado de la práctica experimental de Ingeniería de Requisitos. Incluye identificación de nueve stakeholders, diez requisitos funcionales evaluados, tres requisitos de calidad cuantificables, suposiciones, plenaria, revisión integradora y conclusiones.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -43,7 +43,7 @@ Ingeniería de requisitos, ISO/IEC/IEEE 29148, UTEQ, sistema bibliotecario.
 \section{Introducción}
 La Universidad Técnica Estatal de Quevedo requiere, en el caso de estudio planteado, un sistema bibliotecario en línea que facilite la consulta de libros, la gestión de préstamos y el control de los recursos bibliográficos utilizados por estudiantes y docentes de sus diecisiete carreras.
 
-Desde la Ingeniería de Requisitos, el propósito de esta práctica es identificar las necesidades de los interesados y expresarlas como requisitos claros, completos, singulares y verificables, siguiendo los principios de especificación y validación de requisitos \cite{ieee29148,pohl2025,swebok2024}. La actividad corresponde a la práctica experimental n.\textsuperscript{o} 1 de la Semana 1 de la asignatura ISR-401, y utiliza como referencia las características de los requisitos expuestas a partir de ISO/IEC/IEEE 29148:2018 \cite{uteqsemana1,ieee29148}.
+Desde la Ingeniería de Requisitos, el propósito de esta práctica es identificar las necesidades de los interesados y expresarlas como requisitos claros, completos, singulares y verificables, siguiendo los principios de especificación y validación de requisitos. \cite{ieee29148,pohl2025,swebok2024}. La actividad corresponde a la práctica experimental n.\textsuperscript{o} 1 de la Semana 1 de la asignatura ISR-401, y utiliza como referencia las características de los requisitos expuestas a partir de ISO/IEC/IEEE 29148:2018 \cite{uteqsemana1,ieee29148}.
 
 \textbf{Alcance y estado de validación:} el presente documento constituye una \emph{propuesta académica preliminar}. Las políticas de préstamos, renovación, bloqueo y cifras de desempeño aquí definidas son supuestos para la práctica; no se presentan como decisiones oficiales de la biblioteca UTEQ ni como resultados de entrevistas realizadas.
 
@@ -320,7 +320,24 @@ Se proponen siete hallazgos para la presentación grupal, a partir de los criter
 \item \textbf{Eliminar la ambigüedad.} Palabras como «rápido», «sencillo» o «casi siempre» generan interpretaciones incompatibles. Deben sustituirse por condiciones y criterios verificables.
 \item \textbf{Aplicar una plantilla uniforme.} «El sistema deberá\ldots{} cuando\ldots{} con el fin de\ldots{}» facilita identificar acción, objeto, condición y propósito.
 \item \textbf{Evaluar las nueve características por separado.} Un requisito puede ser necesario pero ambiguo, factible pero incompleto, o formalmente conforme pero incorrecto respecto a la necesidad real.
+\item \textbf{Considerar las diecisiete carreras.} Pueden existir demandas bibliográficas diferentes. Es necesario incluir participantes de distintas áreas para evitar omisiones y sesgos.
+\item \textbf{Prever conectividad y diversidad de roles.} El acceso móvil en redes limitadas y los permisos distintos de estudiantes, docentes y bibliotecarios condicionan rendimiento, interacción y seguridad.
+\item \textbf{Validar la integración institucional.} La identidad institucional y los datos de carrera pueden requerir integración con servicios existentes. Las políticas de circulación deben confirmarse con responsables de biblioteca.
 \end{enumerate}
+
+\section{Revisión de integración para el documento final}
+\begin{enumerate}
+\item Comprobar la correspondencia entre los nueve stakeholders y los roles empleados en RF-01 a RF-10.
+\item Comprobar que los requisitos funcionales sigan la plantilla obligatoria y que RF-07 incluya su versión corregida.
+\item Contrastar los umbrales de los RNF con los supuestos iniciales y mantener explícito su carácter no validado.
+\item Revisar la integridad de las tablas, citas y claves de bibliografía; regenerar el PDF mediante \texttt{pdflatex}, \texttt{biber} y dos ejecuciones posteriores de \texttt{pdflatex}.
+\item Verificar el documento final con el equipo y conservar en el repositorio únicamente evidencia real de las aportaciones y revisiones de cada integrante.
+\end{enumerate}
+
+\section{Conclusiones}
+La práctica permitió aplicar principios de Ingeniería de Requisitos al escenario de un sistema bibliotecario universitario. Se identificaron nueve stakeholders, se elaboraron diez requisitos funcionales, se utilizó una matriz de revisión de calidad y se reformularon tres requisitos vagos mediante indicadores cuantificables y métodos de verificación.
+
+La calidad de una especificación no depende solamente de su redacción formal: también requiere condiciones precisas, viabilidad y validación con los interesados \cite{ieee29148,swebok2024}. Un requisito no queda aprobado por utilizar correctamente la plantilla; debe corresponder a una necesidad real del sistema y permitir que se compruebe su cumplimiento.
 
 \printbibliography[title={Referencias}]
 \end{document}
